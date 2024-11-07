@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:arlicgoodshop/menu.dart';
+import 'package:arlicgoodshop/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());

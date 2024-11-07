@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:arlicgoodshop/widgets/left_drawer.dart';
+import 'package:arlicgoodshop/screens/itementry_form.dart';
 
 class MyHomePage extends StatelessWidget {
   final String npm = '2306202694'; // NPM
@@ -16,6 +18,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       // AppBar adalah bagian atas halaman yang menampilkan judul.
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         // Judul aplikasi "Arlic Good Shop" dengan teks putih dan tebal.
         title: const Text(
           'Arlic Good Shop',
@@ -27,6 +30,7 @@ class MyHomePage extends StatelessWidget {
         // Warna latar belakang AppBar diambil dari skema warna tema aplikasi.
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
+      drawer: const LeftDrawer(),
       // Body halaman dengan padding di sekelilingnya.
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -148,6 +152,12 @@ class ItemCard extends StatelessWidget {
             ..hideCurrentSnackBar()
             ..showSnackBar(SnackBar(
                 content: Text("Kamu telah menekan tombol ${item.name}!")));
+          if (item.name == "Tambah Produk") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ItemEntryFormPage()));
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(8),

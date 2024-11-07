@@ -215,3 +215,139 @@ class ItemCard extends StatelessWidget {
     );
   }
 }
+
+Tugas 8
+1. Apa kegunaan const di Flutter? Jelaskan apa keuntungan ketika menggunakan const pada kode Flutter. Kapan sebaiknya kita menggunakan const, dan kapan sebaiknya tidak digunakan?
+Jawab: 
+Const digunakan untuk membuat objek yang bersifat immutable dan diinisialisasi saat waktu kompilasi (compile-time constant). Saat menggunakan const, Flutter hanya akan membuat satu instance dari objek yang sama dalam memori, bahkan jika objek tersebut digunakan berkali-kali di berbagai tempat. Hal ini dapat membantu meningkatkan efisiensi memori dan performa aplikasi.
+
+Berikut beberapa keuntungan menggunakan const di flutter:
+a. Menghemat Memori: Objek yang identik akan berbagi instance yang sama di memori.
+b. Peningkatan Performa: Objek const diinisialisasi saat kompilasi, sehingga runtime tidak perlu lagi membuat objek baru. 
+c. Keamanan dan Prediktabilitas: Objek const bersifat immutable, sehingga nilainya tidak dapat diubah setelah inisialisasi.
+
+Sebaiknya, gunakan const ketika objek yang didefinisikan tidak perlu diubah, misalnya, widget dasar seperti Text, Icon, SizedBox, atau Padding yang selalu sama tampilannya di aplikasi.
+
+Sebaiknya, tidak gunakan const ketika objek yang didefinisikan bersifat dinamis atau sering berubah karena flutter tidak bisa mengoptimalkan objek dinamis saat kompilasi.
+
+2. Jelaskan dan bandingkan penggunaan Column dan Row pada Flutter. Berikan contoh implementasi dari masing-masing layout widget ini!
+Jawab:
+Column dan Row merupakan dua widget utama untuk membuat layout secara vertikal dan horizontal. Keduanya dapat digunakan untuk menyusun beberapa widget dalam satu baris atau kolom dengan mudah.
+
+Berikut beberapa karakteristik yang membedakan penggunaan Column dan Row. Dari sisi orientasi, Column menyusun widget secara vertikal, sedangkan Row menyusun widget secara horizontal. Dari sisi Main Axis, Column memiliki arah vertikal, sedangkan Row memiliki arah horizontal. Dari sisi Cross Axis, Column memiliki arah horizonal, sedangkan Raw memiliki arah vertikal. Dari sisi scroll, Column yang panjang dapat dibungkus dengan SingleChildScrollView untuk scroll vertikal, sedangkan Row dapat dibungkus dengan SingleChildScrollView untuk scroll horizontal.
+
+Contoh implementasi Column:
+
+Column(children: [
+  Text(
+    'Arlic Good Shop',
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
+  Padding(padding: EdgeInsets.all(8)),
+  Text(
+    "Ayo beli produk terbaikmu disini!",
+    style: TextStyle(
+      fontSize: 15,
+      color: Colors.white,
+      fontWeight: FontWeight.normal,
+    ),
+    textAlign: TextAlign.center,
+  ),
+],
+),
+
+Contoh implementasi Row:
+
+Row(
+  mainAxisAlignment: MainAxisAlignment.spaceAround, // Menyusun widget dengan jarak yang sama di antara mereka secara horizontal
+  crossAxisAlignment: CrossAxisAlignment.center, // Menyusun widget di tengah secara vertikal
+  children: [
+    Icon(Icons.home),
+    Icon(Icons.star),
+    Icon(Icons.settings),
+  ],
+);
+
+
+3. Sebutkan apa saja elemen input yang kamu gunakan pada halaman form yang kamu buat pada tugas kali ini. Apakah terdapat elemen input Flutter lain yang tidak kamu gunakan pada tugas ini? Jelaskan!
+Jawab: 
+Pada tugas kali ini, elemen input yang digunakan pada halaman form adalah TextFormField. TextFormField digunakan untuk setiap input Nama, Amount, dan Description.
+
+Tentunya, terdapat elemen input Flutter lain yang tidak digunakan pada tugas ini. Elemen yang tidak digunakan sebagai berikut:
+a. Checkbox: Digunakan untuk memilih opsi ya/tidak (boolean). Misalnya, bisa digunakan untuk menandai apakah item ini aktif atau tidak.
+b. Switch: Mirip dengan Checkbox, tetapi berbentuk sakelar on/off. Umumnya digunakan untuk mengatur pengaturan atau fitur yang bisa diaktifkan atau dinonaktifkan.
+c. Radio: Digunakan untuk memilih satu dari beberapa opsi (satu pilihan dari beberapa). Cocok untuk memilih kategori item atau tipe item yang hanya memiliki satu pilihan.
+
+dan elemen lainnya yang belum perlu digunakan pada tugas kali ini.
+
+
+4. Bagaimana cara kamu mengatur tema (theme) dalam aplikasi Flutter agar aplikasi yang dibuat konsisten? Apakah kamu mengimplementasikan tema pada aplikasi yang kamu buat?
+Jawab:
+Berikut yang saya lakukan untuk mengatur tema dalam aplikasi Flutter agar aplikasi yang dibuat konsisten.
+a. Menentukan Tema Utama (ThemeData): Saya sudah menentukan tema utama untuk aplikasi dengan mendefinisikan ThemeData di dalam MaterialApp. Saya menggunakan colorScheme untuk mengatur warna aplikasi secara konsisten. Berikut implementasinya:
+
+theme: ThemeData(
+  colorScheme: ColorScheme.fromSwatch(
+    primarySwatch: Colors.orange,
+  ).copyWith(secondary: Colors.orange[600]),
+  useMaterial3: true,
+),
+
+b. Menggunakan Warna dari Tema di Widget: Di dalam ItemEntryFormPage, Saya bisa mengambil warna utama dan sekunder dari colorScheme yang telah diatur. Berikut adalah contoh penggunaan warna tema di AppBar dan ElevatedButton dalam halaman Saya:
+
+appBar: AppBar(
+  title: const Center(
+    child: Text('Form Tambah Item'),
+  ),
+  backgroundColor: Theme.of(context).colorScheme.primary,  // Mengambil warna utama dari tema
+  foregroundColor: Colors.white,
+),
+
+c. Mengambil Manfaat Konsistensi Tema: Dengan menentukan colorScheme di ThemeData, Saya bisa menggunakan Theme.of(context).colorScheme.primary atau Theme.of(context).colorScheme.secondary di seluruh widget lainnya yang membutuhkan warna sesuai tema aplikasi. Ini memastikan semua elemen mengikuti tema yang sama dan membuat aplikasi terlihat konsisten.
+
+5. Bagaimana cara kamu menangani navigasi dalam aplikasi dengan banyak halaman pada Flutter?
+Jawab: 
+Untuk menangani navigasi dalam aplikasi Flutter dengan banyak halaman, Kita dapat menggunakan widget Navigator dan metode navigasi yang disediakan, seperti push(), pop(), dan pushReplacement(). Berikut ini adalah cara menggunakan masing-masing metode sesuai kebutuhan:
+a. Menambah Halaman Baru ke Stack dengan push()
+Gunakan Navigator.push() untuk menambahkan halaman baru di atas halaman yang sedang ditampilkan. Ini berarti halaman baru akan ditambahkan ke paling atas dari stack, sehingga pengguna dapat kembali ke halaman sebelumnya dengan tombol Back di perangkat. Berikut contoh implementasinya:
+
+Navigator.push(
+context,
+MaterialPageRoute(
+  builder: (context) => const ItemEntryFormPage(),
+));
+
+Contoh implementasi di atas akan memindahkan pengguna ke ItemEntryFormPage tanpa menghapus elemen sebelumnya dari stack.
+
+b. Kembali ke Halaman Sebelumnya dengan pop()
+Gunakan Navigator.pop() untuk menutup halaman yang sedang aktif dan kembali ke halaman sebelumnya di stack. Ini sangat berguna ketika pengguna ingin kembali tanpa menambahkan halaman baru ke stack. Berikut contoh implementasinya:
+
+onPressed: () {
+  Navigator.pop(context);
+}
+
+Metode ini menghapus halaman yang sedang ditampilkan dari stack dan kembali ke halaman yang berada di bawahnya.
+
+c. Mengganti Halaman di Stack dengan pushReplacement()
+Gunakan Navigator.pushReplacement() jika kita ingin mengganti halaman saat ini dengan halaman baru tanpa menambahkannya ke stack. Halaman baru akan menggantikan halaman saat ini di stack. Berikut contoh implementasinya:
+
+Navigator.pushReplacement(
+context,
+MaterialPageRoute(
+  builder: (context) => MyHomePage(),
+));
+
+pushReplacement() berguna saat kita tidak ingin pengguna bisa kembali ke halaman sebelumnya, seperti saat berpindah dari halaman login ke halaman utama setelah login berhasil.
+
+d. Menggunakan nvigasi yang Lebih Kompleks dengan popUntil(), canPop(), dan maybePop()
+
+  - popUntil(): Menghapus halaman dari stack hingga kondisi tertentu terpenuhi, memungkinkan kita untuk kembali ke halaman tertentu tanpa memerlukan banyak pop() manual.
+  - canPop(): Memeriksa apakah ada halaman lain dalam stack sebelum memanggil pop().
+  - maybePop(): Mirip dengan pop(), tetapi hanya berfungsi jika ada halaman yang bisa di-pop.
+
+Dengan menggunakan Navigator dan berbagai metodenya, kita dapat membuat sistem navigasi yang fleksibel dan intuitif di dalam aplikasi.
