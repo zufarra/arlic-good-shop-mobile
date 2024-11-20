@@ -1,3 +1,4 @@
+import 'package:arlicgoodshop/screens/list_itementry.dart';
 import 'package:flutter/material.dart';
 import 'package:arlicgoodshop/screens/menu.dart';
 import 'package:arlicgoodshop/screens/itementry_form.dart';
@@ -60,6 +61,17 @@ class LeftDrawer extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => const ItemEntryFormPage(),
                   ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_reaction_rounded),
+            title: const Text('Daftar Item'),
+            onTap: () {
+              // Route menu ke halaman item
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ItemEntryPage()),
+              );
             },
           ),
         ],

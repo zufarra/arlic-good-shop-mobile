@@ -1,3 +1,5 @@
+import 'package:arlicgoodshop/screens/list_itementry.dart';
+import 'package:arlicgoodshop/screens/login.dart';
 import 'package:flutter/material.dart';
 import 'package:arlicgoodshop/widgets/left_drawer.dart';
 import 'package:arlicgoodshop/screens/itementry_form.dart';
@@ -157,6 +159,17 @@ class ItemCard extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => const ItemEntryFormPage()));
+          } else if (item.name == "Lihat Daftar Produk") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ItemEntryPage()),
+            );
+          } else if (item.name == "Logout") {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const LoginPage()),
+              (route) => false, // Menghapus semua riwayat navigasi
+            );
           }
         },
         child: Container(
